@@ -11,7 +11,6 @@ export class UserService {
     try {
       const updatedData = {
         ...data,
-        email: email, // Remplacer l'email par celui provenant du token authentifié
       };
       // Valider les données entrantes
       const validData = this.validateUserProfileData(updatedData);
@@ -22,7 +21,9 @@ export class UserService {
       // Mettre à jour le profil de l'utilisateur dans Firestore
       const userRef = admin.firestore().collection('users').doc(uid);
       const writeResult = await userRef.set(updatedData, { merge: true });
-
+      await admin.auth().updateUser(uid, {
+        email,
+      });
       // Retourner un message de succès avec les données sauvegardées
       return {
         message: 'Profil utilisateur mis à jour avec succès.',
@@ -78,7 +79,6 @@ export class UserService {
 
     const userDoc = await admin.firestore().collection('users').doc(uid).get();
     const userData = userDoc.exists ? userDoc.data() : {};
-
     const combinedUserProfile = {
       uid: authUser.uid,
       email: authUser.email,
