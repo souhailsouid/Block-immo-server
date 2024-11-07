@@ -1,4 +1,4 @@
-import { Controller, Post, UploadedFile, UseInterceptors, Req, Get, Param } from '@nestjs/common';
+import { Controller, Post, UploadedFile, UseInterceptors, Req, Get, Param, Logger } from '@nestjs/common';
 import { MulterFile } from 'multer'; 
 import { FileInterceptor } from '@nestjs/platform-express';
 import { FileService } from './storage.service';
@@ -20,14 +20,14 @@ export class FileController {
   async getUserFiles(@Req() req: Request) {
    
     const userId = req['user'].uid;
-    const files = await this.fileService.getUserFiles(userId);
+    const files = await this.fileService.getFilesWithSignedUrls(userId);
     return { files };
   }
 
   @Get('file/:filename')
-  async getFileUrl(@Param('filename') filename: string, @Req() req: Request) {
-    const userId = req['user'].uid;
-    const url = await this.fileService.generateSignedUrl(filename, userId);
+  async getFileUrl(@Param('filename') filename: string) {
+
+    const url = await this.fileService.generateSignedUrl(filename);
     return { url };
   }
 }

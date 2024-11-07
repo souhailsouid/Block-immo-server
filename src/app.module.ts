@@ -6,8 +6,17 @@ import { AuthModule } from './auth/auth.module';
 import { FirebaseAuthMiddleware } from 'src/middleware/firebase-auth.middleware';
 import { StorageModule } from './storage/storage.module';
 import { PDFStorageModule } from './pdf-storage/pdf.module';
+import { ClerkModule } from './clerk/clerk.module';
+import { clerkMiddleware } from '@clerk/express';
+
 @Module({
-  imports: [AuthModule, UserModule, StorageModule, PDFStorageModule],
+  imports: [
+    AuthModule,
+    UserModule,
+    StorageModule,
+    PDFStorageModule,
+    ClerkModule,
+  ],
 
   controllers: [AppController],
   providers: [AppService],
@@ -23,5 +32,8 @@ export class AppModule {
         { path: 'user/profile/:id', method: RequestMethod.GET },
         { path: 'user/profile/:id', method: RequestMethod.PUT },
       );
+    consumer
+      .apply(clerkMiddleware)
+      // .forRoutes({ path: 'clerk/first-signin/:id', method: RequestMethod.POST });
   }
 }

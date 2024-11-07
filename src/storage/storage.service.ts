@@ -41,19 +41,36 @@ export class FileService {
     return filesSnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
   }
 
-  async generateSignedUrl(fileName: string, userId: string) {
+  async generateSignedUrl(fileName: string) {
     const file = admin.storage().bucket().file(fileName);
-
-    const [metadata] = await file.getMetadata();
-    if (metadata.metadata.owner !== userId) {
-      throw new Error('Unauthorized access to this file');
-    }
-
+  
+    // const [metadata] = await file.getMetadata();
+    
+    // // Check if the 'owner' metadata exists and matches the userId
+    // if (!metadata.metadata || metadata.metadata.owner !== userId) {
+    //   throw new Error('Unauthorized access to this file');
+    // }
+  
     const [url] = await file.getSignedUrl({
       action: 'read',
-      expires: Date.now() + 60 * 60 * 1000,
+      expires: Date.now() + 60 * 60 * 1000, // Expires in 1 hour
     });
-
+  
     return url;
+  
   }
+
+  async getFilesWithSignedUrls(userId: string) {
+    const filesSnapshot = await admin.firestore().collection('files').where('userId', '==', userId).get();
+    const filesWithUrls = await Promise.all(
+      filesSnapshot.docs.map(async (doc) => {
+        const fileData = doc.data();
+        const fileName = fileData.fileName;
+        const fileUrl = await this.generateSignedUrl(fileName);
+        return { ...fileData, fileUrl, id: doc.id };
+      })
+    );
+    return filesWithUrls;
+  }
+  
 }
