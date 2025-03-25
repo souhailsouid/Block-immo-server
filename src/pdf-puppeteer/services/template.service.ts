@@ -1,6 +1,5 @@
 import { Injectable } from '@nestjs/common';
 import { FormattedRetractionLetterData } from '../interfaces/retraction-letter.interface';
-import { FormattedNoticeLetterData } from '../interfaces/notice-letter.interface';
 
 @Injectable()
 export class TemplateService {
@@ -102,89 +101,6 @@ export class TemplateService {
           <div class="signature">
             <div class="signature-line"></div>
             ${letterData.senderName}
-          </div>
-        </body>
-      </html>
-    `;
-  }
-
-  generateNoticeLetterHTML(letterData: FormattedNoticeLetterData): string {
-    return `
-      <!DOCTYPE html>
-      <html>
-        <head>
-          <meta charset="UTF-8">
-          <style>
-            body {
-              font-family: Arial, sans-serif;
-              line-height: 1.6;
-              margin: 0;
-              padding: 20px;
-            }
-            .sender-info {
-              margin-bottom: 20px;
-            }
-            .recipient-info {
-              margin-bottom: 20px;
-            }
-            .date-location {
-              margin-bottom: 20px;
-              text-align: right;
-            }
-            .subject {
-              margin-bottom: 20px;
-              font-weight: bold;
-            }
-            .letter-content {
-              margin-bottom: 20px;
-            }
-            .signature {
-              margin-top: 50px;
-            }
-            .signature-name {
-              margin-top: 20px;
-              font-weight: bold;
-            }
-          </style>
-        </head>
-        <body>
-          <div class="sender-info">
-            ${letterData.senderName}<br>
-            ${letterData.senderAddress}<br>
-            ${letterData.senderPostalCode} ${letterData.senderCity}
-          </div>
-
-          <div class="recipient-info">
-            ${letterData.recipientName}<br>
-            ${letterData.recipientAddress}
-          </div>
-
-          <div class="date-location">
-            ${letterData.location}, le ${letterData.date}
-          </div>
-
-          <div class="subject">
-            Objet : notification de congé de logement
-          </div>
-
-          <div class="letter-content">
-            ${letterData.deliveryType}<br><br>
-
-            Madame, Monsieur,<br><br>
-
-            Je vais prochainement quitter mon logement.${letterData.isTightZone ? ' Celui-ci se trouve en zone tendue.' : ''}<br><br>
-
-            ${letterData.isTightZone ? 'Conformément à la loi n° 89-462 du 6 juillet 1989 (article 15) et au décret n° 2013-392 relatif au champ d\'application de la taxe annuelle sur les logements vacants instituée par l\'article 232 du code général des impôts (premier tableau en annexe du décret), le préavis dans cette situation est d\'un mois.<br><br>' : ''}
-
-            Le congé prendra effet 1 mois après la date de remise du courrier.<br><br>
-
-            Afin de convenir ensemble d'une date pour vous remettre les clés du logement et réaliser ensemble l'état des lieux, je vous informe que le déménagement est prévu le ${letterData.movingDate}.<br><br>
-
-            Veuillez agréer, Madame, Monsieur, l'expression de mes salutations distinguées.
-          </div>
-
-          <div class="signature">
-            <div class="signature-name">${letterData.senderName}</div>
           </div>
         </body>
       </html>

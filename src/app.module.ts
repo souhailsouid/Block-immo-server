@@ -8,7 +8,7 @@ import { StorageModule } from './storage/storage.module';
 import { PDFStorageModule } from './pdf-storage/pdf.module';
 import { ClerkModule } from './clerk/clerk.module';
 import { clerkMiddleware } from '@clerk/express';
-import { PdfPuppeteerModule } from './pdf-puppeteer/pdf-puppeteer.module';
+import { PDFPuppeteerModule } from './pdf-puppeteer/pdf-puppeteer.module';
 
 @Module({
   imports: [
@@ -17,7 +17,7 @@ import { PdfPuppeteerModule } from './pdf-puppeteer/pdf-puppeteer.module';
     StorageModule,
     PDFStorageModule,
     ClerkModule,
-    PdfPuppeteerModule,
+    PDFPuppeteerModule,
   ],
 
   controllers: [AppController],

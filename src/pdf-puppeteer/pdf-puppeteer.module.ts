@@ -1,21 +1,26 @@
 import { Module } from '@nestjs/common';
-import { RetractionLetterService } from './services/retraction-letter.service';
-import { NoticeLetterService } from './services/notice-letter.service';
-import { FileService } from './services/file.service';
-import { TemplateService } from './services/template.service';
-import { ValidationService } from './services/validation.service';
-import { BaseLetterService } from './services/base-letter.service';
-import { LetterController } from './controllers/letter.controller';
+import { PDFPuppeteerService } from './pdf-puppeteer.service';
+import { PDFPuppeteerController } from './pdf-puppeteer.controller';
+import { PreviewService } from './preview.service';
+import { PreviewController } from './preview.controller';
+import { ReceiptService } from './receipt.service';
+import { ReceiptController } from './receipt.controller';
 
 @Module({
-  controllers: [LetterController],
-  providers: [
-    RetractionLetterService,
-    NoticeLetterService,
-    FileService,
-    TemplateService,
-    ValidationService,
+  controllers: [
+    PDFPuppeteerController,
+    PreviewController,
+    ReceiptController
   ],
-  exports: [RetractionLetterService, NoticeLetterService],
+  providers: [
+    PDFPuppeteerService,
+    PreviewService,
+    ReceiptService
+  ],
+  exports: [
+    PDFPuppeteerService,
+    PreviewService,
+    ReceiptService
+  ],
 })
-export class PdfPuppeteerModule {} 
+export class PDFPuppeteerModule {} 

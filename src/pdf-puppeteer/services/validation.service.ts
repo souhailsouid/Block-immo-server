@@ -1,71 +1,41 @@
 import { Injectable, BadRequestException } from '@nestjs/common';
 import { RetractionLetterData } from '../interfaces/retraction-letter.interface';
-import { NoticeLetterData } from '../interfaces/notice-letter.interface';
 
 @Injectable()
 export class ValidationService {
   validateRetractionLetterData(letterData: RetractionLetterData): void {
     if (!letterData.gender) {
-      throw new BadRequestException('Le genre est requis');
+      throw new BadRequestException('Le champ gender est obligatoire et doit être "M" ou "F"');
     }
+
     if (!['M', 'F'].includes(letterData.gender)) {
-      throw new BadRequestException('Le genre doit être M ou F');
+      throw new BadRequestException('Le champ gender doit être "M" ou "F"');
     }
+
     if (!letterData.location) {
-      throw new BadRequestException('La localisation est requise');
+      throw new BadRequestException('Le lieu est obligatoire');
     }
+
     if (!letterData.date) {
-      throw new BadRequestException('La date est requise');
+      throw new BadRequestException('La date est obligatoire');
     }
+
     if (!letterData.senderName) {
-      throw new BadRequestException('Le nom de l\'expéditeur est requis');
+      throw new BadRequestException('Le nom et prénom de l\'expéditeur sont obligatoires');
     }
+
     if (!letterData.recipientName) {
-      throw new BadRequestException('Le nom du destinataire est requis');
+      throw new BadRequestException('Le nom du destinataire est obligatoire');
     }
+
     if (!letterData.amount) {
-      throw new BadRequestException('Le montant est requis');
+      throw new BadRequestException('Le montant est obligatoire');
     }
-    if (!this.isValidDate(letterData.date)) {
-      throw new BadRequestException('Format de date invalide');
-    }
-  }
 
-  validateNoticeLetterData(letterData: NoticeLetterData): void {
-    if (!letterData.gender) {
-      throw new BadRequestException('Le genre est requis');
+    try {
+      new Date(letterData.date);
+    } catch (error) {
+      throw new BadRequestException('Le format de la date est invalide');
     }
-    if (!['M', 'F'].includes(letterData.gender)) {
-      throw new BadRequestException('Le genre doit être M ou F');
-    }
-    if (!letterData.location) {
-      throw new BadRequestException('La localisation est requise');
-    }
-    if (!letterData.date) {
-      throw new BadRequestException('La date est requise');
-    }
-    if (!letterData.senderName) {
-      throw new BadRequestException('Le nom de l\'expéditeur est requis');
-    }
-    if (!letterData.recipientName) {
-      throw new BadRequestException('Le nom du destinataire est requis');
-    }
-    if (!letterData.deliveryType) {
-      throw new BadRequestException('Le type de remise du courrier est requis');
-    }
-    if (!letterData.movingDate) {
-      throw new BadRequestException('La date de déménagement est requise');
-    }
-    if (!this.isValidDate(letterData.date)) {
-      throw new BadRequestException('Format de date invalide');
-    }
-    if (!this.isValidDate(letterData.movingDate)) {
-      throw new BadRequestException('Format de date de déménagement invalide');
-    }
-  }
-
-  private isValidDate(dateString: string): boolean {
-    const date = new Date(dateString);
-    return date instanceof Date && !isNaN(date.getTime());
   }
 } 

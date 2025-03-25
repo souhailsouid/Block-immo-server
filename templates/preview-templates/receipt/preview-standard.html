@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.4;
+            margin: 0;
+            padding: 30px;
+            background-color: white;
+            position: relative;
+        }
+        .preview-overlay {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(-45deg);
+            font-size: 72px;
+            color: rgba(0, 0, 0, 0.1);
+            pointer-events: none;
+            z-index: 1000;
+            white-space: nowrap;
+            font-weight: bold;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 25px;
+            border-bottom: 2px solid #333;
+            padding-bottom: 10px;
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 24px;
+            color: #333;
+        }
+        .header p {
+            margin: 5px 0 0;
+            font-size: 14px;
+            color: #666;
+        }
+        .company-info {
+            margin-bottom: 20px;
+            font-size: 12px;
+        }
+        .company-info h2 {
+            margin: 0 0 5px;
+            font-size: 16px;
+            color: #333;
+        }
+        .company-info p {
+            margin: 2px 0;
+        }
+        .receipt-info {
+            margin-bottom: 20px;
+            text-align: right;
+            font-size: 12px;
+        }
+        .receipt-info p {
+            margin: 2px 0;
+        }
+        .tenant-info, .property-info {
+            margin-bottom: 20px;
+            font-size: 12px;
+        }
+        .tenant-info h3, .property-info h3 {
+            margin: 0 0 5px;
+            font-size: 14px;
+            color: #333;
+        }
+        .tenant-info p, .property-info p {
+            margin: 2px 0;
+        }
+        .amount-details {
+            margin: 20px 0;
+            padding: 15px;
+            background-color: #f9f9f9;
+            border-radius: 4px;
+            border: 1px solid #eee;
+            font-size: 12px;
+        }
+        .amount-details h3 {
+            margin: 0 0 10px;
+            font-size: 14px;
+            color: #333;
+        }
+        .amount-details p {
+            margin: 5px 0;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+            font-size: 12px;
+        }
+        th, td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #f5f5f5;
+            font-weight: bold;
+            font-size: 12px;
+        }
+        .footer {
+            margin-top: 30px;
+            text-align: center;
+            font-size: 10px;
+            color: #666;
+            border-top: 1px solid #eee;
+            padding-top: 10px;
+        }
+        .footer p {
+            margin: 3px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="preview-overlay">PREVIEW</div>
+    <div class="header">
+        <h1>QUITTANCE DE LOYER</h1>
+        <p>N° Q-2024-001</p>
+    </div>
+
+    <div class="company-info">
+        <h2>LAFORET</h2>
+        <p>456 Avenue de Lyon</p>
+        <p>69000 Lyon</p>
+        <p>Tél : 04 78 XX XX XX</p>
+        <p>Email : contact@laforet.fr</p>
+    </div>
+
+    <div class="receipt-info">
+        <p>Fait à Lyon, le 15 janvier 2024</p>
+    </div>
+
+    <div class="tenant-info">
+        <h3>Locataire</h3>
+        <p>M. Jean Dupont</p>
+        <p>123 Rue de la République</p>
+        <p>69002 Lyon</p>
+    </div>
+
+    <div class="property-info">
+        <h3>Bien loué</h3>
+        <p>789 Rue de la Paix</p>
+        <p>69003 Lyon</p>
+        <p>Type : Appartement</p>
+        <p>Surface : 45 m²</p>
+    </div>
+
+    <div class="amount-details">
+        <h3>Détails du paiement</h3>
+        <p>Période : Janvier 2024</p>
+        <p>Date de paiement : 5 janvier 2024</p>
+        <p>Mode de paiement : Virement bancaire</p>
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Description</th>
+                <th>Montant (€)</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Loyer</td>
+                <td>800,00</td>
+            </tr>
+            <tr>
+                <td>Charges</td>
+                <td>50,00</td>
+            </tr>
+            <tr>
+                <td><strong>Total</strong></td>
+                <td><strong>850,00</strong></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="footer">
+        <p>Cette quittance annule tous les reçus qui auraient pu être établis précédemment pour la même période.</p>
+        <p>Elle ne vaut pas justificatif de domicile.</p>
+    </div>
+</body>
+</html> 
