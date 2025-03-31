@@ -16,7 +16,7 @@ export interface BaseLetterData {
 
 export interface FileMetadata {
   fileName: string;
-  fileUrl: string;
+  filePath: string;
   createdAt: Date;
   type: LetterType;
 }

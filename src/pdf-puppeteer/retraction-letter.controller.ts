@@ -38,7 +38,7 @@ export class RetractionLetterController {
       throw new BadRequestException('Le champ gender doit être "M" ou "F"');
     }
 
-    const signedUrl = await this.retractionLetterService.generateRetractionLetter(userId, letterData);
-    return { signedUrl };
+    const { signedUrl, metadata } = await this.retractionLetterService.generateRetractionLetter(userId, letterData);
+    return { signedUrl, metadata };
   }
 } 

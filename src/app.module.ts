@@ -9,6 +9,7 @@ import { PDFStorageModule } from './pdf-storage/pdf.module';
 import { ClerkModule } from './clerk/clerk.module';
 import { clerkMiddleware } from '@clerk/express';
 import { PDFPuppeteerModule } from './pdf-puppeteer/pdf-puppeteer.module';
+import { RetractionLetterModule } from './pdf-puppeteer/retraction-letter.module';
 
 @Module({
   imports: [
@@ -18,6 +19,7 @@ import { PDFPuppeteerModule } from './pdf-puppeteer/pdf-puppeteer.module';
     PDFStorageModule,
     ClerkModule,
     PDFPuppeteerModule,
+    RetractionLetterModule,
   ],
 
   controllers: [AppController],

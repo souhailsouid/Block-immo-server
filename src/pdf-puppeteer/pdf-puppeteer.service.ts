@@ -47,7 +47,7 @@ export class PDFPuppeteerService {
         action: 'read',
         expires: Date.now() + 60 * 60 * 1000, // 1 heure
       });
-
+      console.log("signedUrl__dans service", signedUrl)
       // Sauvegarder les métadonnées dans Firestore
       await this.saveFileMetadata(userId, {
         fileName,

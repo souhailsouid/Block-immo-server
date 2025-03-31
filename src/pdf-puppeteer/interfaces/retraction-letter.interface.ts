@@ -10,8 +10,9 @@ export interface RetractionLetterData extends BaseLetterData {
 
 export interface FileMetadata {
   fileName: string;
-  fileUrl: string;
+  filePath: string;
   createdAt: Date;
+  type: string;
 }
 
 export interface FormattedRetractionLetterData extends RetractionLetterData {

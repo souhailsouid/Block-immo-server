@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import * as puppeteer from 'puppeteer';
-import { RetractionLetterData, FormattedRetractionLetterData } from './interfaces/retraction-letter.interface';
+import { RetractionLetterData, FormattedRetractionLetterData, FileMetadata } from './interfaces/retraction-letter.interface';
 import { FileService } from './services/file.service';
 import { TemplateService } from './services/template.service';
 import { ValidationService } from './services/validation.service';
@@ -48,7 +48,7 @@ export class RetractionLetterService {
     };
   }
 
-  async generateRetractionLetter(userId: string, letterData: RetractionLetterData): Promise<string> {
+  async generateRetractionLetter(userId: string, letterData: RetractionLetterData): Promise<{ signedUrl: string; metadata: FileMetadata }> {
     this.validationService.validateRetractionLetterData(letterData);
     const formattedData = this.getDefaultData(letterData);
 
@@ -75,7 +75,8 @@ export class RetractionLetterService {
         },
       });
 
-      return await this.fileService.savePdfToStorage(userId, Buffer.from(pdfBuffer), 'RETRACTION_LETTER' as LetterType);
+      const { signedUrl, metadata } = await this.fileService.savePdfToStorage(userId, Buffer.from(pdfBuffer), 'RETRACTION_LETTER' as LetterType);
+      return { signedUrl, metadata };
     } finally {
       await browser.close();
     }
